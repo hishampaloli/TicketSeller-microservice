@@ -23,4 +23,12 @@ build:
       sync:
         manual:
           - src: "**/*.js"
-            dest: .            
+            dest: .      
+    - image: hishampaloli/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .                          

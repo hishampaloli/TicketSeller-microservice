@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { validateRequest } from "../middlewares/validateRequest";
+import { RequestValidationError } from "@hpticketings/common";
+import { validateRequest } from "@hpticketings/common";
 import { User } from "../models/user";
-import { BadRequestError } from "../errors/bad-request-error";
+import { BadRequestError } from "@hpticketings/common";
 import { Password } from "../utils/password";
 import jwt from "jsonwebtoken";
 

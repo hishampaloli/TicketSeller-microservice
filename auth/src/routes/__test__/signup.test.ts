@@ -1,5 +1,4 @@
 import request from "supertest";
-import { idText } from "typescript";
 import { app } from "../../app";
 
 it("returns a 201 successful signup", async () => {
