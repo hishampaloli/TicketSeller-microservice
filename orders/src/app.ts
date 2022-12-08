@@ -2,10 +2,10 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-import { createTicketRoute } from "./routes/new";
-import { showTicketRouter } from "./routes/show";
-import { indexTicketRouter } from "./routes/index";
-// import { updateTicketRouter } from "./routes/update";
+import { newOrderRouter } from "./routes/new";
+import { showOrderRouter } from "./routes/show";
+import { indexOrderRouter } from "./routes/index";
+import { deleteOrderRouter } from "./routes/delete";
 
 import { errorHandler } from "@hpticketings/common/build";
 import { NotFoundError, currentUser } from "@hpticketings/common/build";
@@ -21,10 +21,10 @@ app.use(
 
 app.use(currentUser);
 
-app.use(createTicketRoute);
-app.use(showTicketRouter);
-app.use(indexTicketRouter);
-app.use(updateTicketRouter);
+app.use(newOrderRouter);
+app.use(deleteOrderRouter);
+app.use(indexOrderRouter);
+app.use(showOrderRouter);
 
 app.all("*", async (req, res) => {
   throw new NotFoundError();

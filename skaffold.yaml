@@ -32,7 +32,14 @@ build:
         manual:
           - src: "**/*.ts"
             dest: .              
-
+    - image: hishampaloli/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.ts"
+            dest: .  
 
             
                        
