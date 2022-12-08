@@ -5,7 +5,7 @@ import cookieSession from "cookie-session";
 import { createTicketRoute } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes/index";
-import { updateTicketRouter } from "./routes/update";
+// import { updateTicketRouter } from "./routes/update";
 
 import { errorHandler } from "@hpticketings/common/build";
 import { NotFoundError, currentUser } from "@hpticketings/common/build";
