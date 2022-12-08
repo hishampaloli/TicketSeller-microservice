@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { requireAuth, validateRequest } from "@hpticketings/common/build";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publish";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -15,7 +17,7 @@ router.post(
       .withMessage("Price must be greater than 0"),
   ],
   validateRequest,
- async (req: Request, res: Response) => {
+  async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
     const ticket = Ticket.build({
@@ -24,8 +26,15 @@ router.post(
       userId: req.currentUser!.id,
     });
 
-    await ticket.save()
-    res.status(201).send(ticket)
+   await ticket.save();
+   await new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
+
+    res.status(201).send(ticket);
   }
 );
 
