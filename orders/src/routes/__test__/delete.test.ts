@@ -4,11 +4,13 @@ import { OrderStatus } from "@hpticketings/common";
 import { Order } from "../../models/order";
 import { Ticket } from "../../models/ticket";
 import { natsWrapper } from "../../nats-wrapper";
+import mongoose from "mongoose";
 
 it("mark an order as cancelled", async () => {
   const ticket = Ticket.build({
     title: "concert",
     price: 20,
+    id: new mongoose.Types.ObjectId().toHexString(),
   });
 
   await ticket.save();
@@ -36,6 +38,7 @@ it("emit a order cancelled event", async () => {
   const ticket = Ticket.build({
     title: "concert",
     price: 20,
+    id: new mongoose.Types.ObjectId().toHexString(),
   });
 
   await ticket.save();
@@ -53,6 +56,6 @@ it("emit a order cancelled event", async () => {
     .set("Cookie", user)
     .send()
     .expect(204);
- 
+
   expect(natsWrapper.client.publish).toHaveBeenCalled();
 });

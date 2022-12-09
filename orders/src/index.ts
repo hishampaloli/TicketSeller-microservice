@@ -40,7 +40,7 @@ const start = async () => {
     process.on("SIGTERM", () => natsWrapper.client.close());
 
     new TicketCreatedListener(natsWrapper.client).listen();
-    new TicketUpdatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen(); 
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to TICKETIN  MongoDb");
