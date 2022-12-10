@@ -40,6 +40,13 @@ build:
         manual:
           - src: "**/*.ts"
             dest: .  
-
+    - image: hishampaloli/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
             
                        
